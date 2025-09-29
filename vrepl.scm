@@ -58,11 +58,10 @@
   (repl-body< an_eval *top-exp*)
   (repl< an_eval))
 ;
-(define repl<
-  (lambda args
-    (if (null? args) (set! args '(eval<)))  ; the defalut eval function is 'eval<'.
-    (set! *top-exp* (read))
-    (cond
-      ((atom? *top-exp*) (repl-loop< (car args)))
-      ((eq? 'exit (car *top-exp*)) (display ""))
-      (else (repl-loop< (car args))))))
+(define (repl< . args)
+  (if (null? args) (set! args '(eval<)))  ; the defalut eval function is 'eval<'.
+  (set! *top-exp* (read))
+  (cond
+    ((atom? *top-exp*) (repl-loop< (car args)))
+    ((eq? 'exit (car *top-exp*)) (display ""))
+    (else (repl-loop< (car args)))))
